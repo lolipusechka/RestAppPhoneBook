@@ -1,6 +1,7 @@
 package local.restphonebook.phonebook.service.impl;
 
 import local.restphonebook.phonebook.model.Phone;
+import local.restphonebook.phonebook.model.User;
 import local.restphonebook.phonebook.service.PhoneService;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +19,10 @@ public class PhoneServiceImpl implements PhoneService {
 
 
     @Override
-    public void create(Long phoneNumber) {
-        final Phone phone = new Phone();
-        final Integer idPhone = phoneIdHolder.incrementAndGet();
-        phone.setId(idPhone);
-        phone.setPhoneNumber(phoneNumber);
-        phoneMap.put(idPhone, phone);
+    public void create(Phone phone) {
+        final Integer phoneId = phoneIdHolder.incrementAndGet();
+        phone.setId(phoneId);
+        phoneMap.put(phoneId, phone);
     }
 
     @Override
@@ -37,10 +36,9 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public boolean update(Phone phone, Integer id, Long phoneNumber) {
+    public boolean update(Phone phone, Integer id) {
         if (phoneMap.containsKey(id)) {
             phone.setId(id);
-            phone.setPhoneNumber(phoneNumber);
             phoneMap.put(id, phone);
             return true;
         } else {

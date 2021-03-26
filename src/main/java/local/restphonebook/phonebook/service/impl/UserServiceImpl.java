@@ -17,11 +17,9 @@ public class UserServiceImpl implements UserService {
     private final AtomicInteger userIdHolder = new AtomicInteger();
 
     @Override
-    public void create(String name) {
-        final User user = new User();
+    public void create(User user) {
         final Integer userId = userIdHolder.incrementAndGet();
         user.setId(userId);
-        user.setName(name);
         userMap.put(userId, user);
     }
 
@@ -36,10 +34,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean update(User user, Integer id, String name) {
+    public boolean update(User user, Integer id) {
         if (userMap.containsKey(id)) {
             user.setId(id);
-            user.setName(name);
             userMap.put(id, user);
             return true;
         } else {

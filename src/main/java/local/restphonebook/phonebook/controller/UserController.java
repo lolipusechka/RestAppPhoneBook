@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+//TODO: One controller to User and Phone
+
 @RestController
 public class UserController {
 
@@ -20,8 +22,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/users")
-    public ResponseEntity<?> create(@RequestBody String name) {
-        userService.create(name);
+    public ResponseEntity<?> create(@RequestBody User user) {
+        userService.create(user);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -44,8 +46,8 @@ public class UserController {
     }
 
     @PutMapping(value = "/users/{id}")
-    public ResponseEntity<?> update(@PathVariable(name = "id") Integer id, @RequestBody String name, User user) {
-        final boolean updated = userService.update(user, id, name);
+    public ResponseEntity<?> update(@PathVariable(name = "id") Integer id, @RequestBody User user) {
+        final boolean updated = userService.update(user, id);
 
         return updated
                 ? new ResponseEntity<>(HttpStatus.OK)

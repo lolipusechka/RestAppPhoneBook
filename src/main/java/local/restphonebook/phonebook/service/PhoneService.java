@@ -1,19 +1,19 @@
 package local.restphonebook.phonebook.service;
 
 import local.restphonebook.phonebook.model.Phone;
+import local.restphonebook.phonebook.model.User;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PhoneService {
 
-    void create(Long phoneNumber);
+    void create(Phone phone);
 
     List<Phone> readAll();
 
     Phone read(Integer id);
 
-    boolean update(Phone phoneBook, Integer id, Long phoneNumber);
+    boolean update(Phone phone, Integer id);
 
     boolean delete(Integer id);
 
