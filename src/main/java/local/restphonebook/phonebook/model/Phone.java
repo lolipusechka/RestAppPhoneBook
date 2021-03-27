@@ -4,15 +4,34 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
-@ToString
+
 public class Phone {
 
     private Integer id;
-    //TODO: private String name;
     private String phoneNumber;
     private Integer userId;
-    private User user;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 }

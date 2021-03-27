@@ -1,7 +1,6 @@
 package local.restphonebook.phonebook.service.impl;
 
 import local.restphonebook.phonebook.model.Phone;
-import local.restphonebook.phonebook.model.User;
 import local.restphonebook.phonebook.service.PhoneService;
 import org.springframework.stereotype.Service;
 
