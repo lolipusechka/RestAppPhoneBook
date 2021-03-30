@@ -4,11 +4,9 @@ import local.restphonebook.phonebook.model.Phone;
 import local.restphonebook.phonebook.service.PhoneService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 @Service
 public class PhoneServiceImpl implements PhoneService {
@@ -32,6 +30,18 @@ public class PhoneServiceImpl implements PhoneService {
     @Override
     public Phone read(Integer id) {
         return phoneMap.get(id);
+    }
+
+    @Override
+    public List<Phone> readByPhoneNumber(String phoneNumber) {
+        String lowerCasePhoneNumber =  phoneNumber.toLowerCase(Locale.ROOT);
+        return phoneMap.entrySet().stream()
+                .map(integerPhoneEntry -> integerPhoneEntry.getValue())
+                .filter(phone -> (((phone.getPhoneNumber().equals(lowerCasePhoneNumber))
+                        && (!lowerCasePhoneNumber.equals("")))
+                        || ((phone.getPhoneNumber().startsWith(lowerCasePhoneNumber))
+                        && (!lowerCasePhoneNumber.equals("")))))
+                .collect(Collectors.toList());
     }
 
     @Override

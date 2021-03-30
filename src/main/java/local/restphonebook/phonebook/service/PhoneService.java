@@ -1,7 +1,6 @@
 package local.restphonebook.phonebook.service;
 
 import local.restphonebook.phonebook.model.Phone;
-import local.restphonebook.phonebook.model.User;
 
 import java.util.List;
 
@@ -12,6 +11,8 @@ public interface PhoneService {
     List<Phone> readAll();
 
     Phone read(Integer id);
+
+    List<Phone> readByPhoneNumber(String phoneNumber);
 
     boolean update(Phone phone, Integer id);
 

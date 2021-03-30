@@ -6,11 +6,13 @@ import java.util.List;
 
 public interface UserService {
 
-    void create(User user);
+    User create(User user);
 
     List<User> readAll();
 
     User read(Integer id);
+
+    List<User> readByName(String name);
 
     boolean update(User user, Integer id);
 
