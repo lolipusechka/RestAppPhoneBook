@@ -150,7 +150,7 @@ public class MainController {
 
     @DeleteMapping(value = "/users/{userId}")
     public ResponseEntity<?> deleteUser(@PathVariable(name = "userId") Integer userId) {
-        if (!userService.delete(1)) {
+        if (!userService.delete(userId)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
