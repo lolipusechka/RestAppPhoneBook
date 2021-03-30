@@ -155,12 +155,6 @@ public class MainController {
         } else {
             return new ResponseEntity<>(HttpStatus.OK);
         }
-
-        /*final boolean deleted = userService.delete(userId);
-
-        return deleted
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
     }
 
     @DeleteMapping(value = "/users/{userId}/phones/{phoneId}")
@@ -173,14 +167,6 @@ public class MainController {
         } else {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
-        /*final User user = userService.read(userId);
-        final boolean deleted = phoneService.delete(phoneId);
-        user.removePhoneFromMap(phoneId);
-
-        return deleted
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.BAD_REQUEST);*/
     }
 
 }
