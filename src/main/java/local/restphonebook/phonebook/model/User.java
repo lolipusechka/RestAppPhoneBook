@@ -1,15 +1,13 @@
 package local.restphonebook.phonebook.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 
 public class User {
 
     private Integer id;
     private String name;
-    private Map<Integer, Phone> phones = new HashMap<>();
+    private List<Phone> phones = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -28,18 +26,24 @@ public class User {
     }
 
     public void addPhoneToMap(Phone phone) {
-        phones.put(phone.getId(), phone);
+        phones.add(phone);
     }
 
     public void removePhoneFromMap(Integer phoneId) {
-        phones.remove(phoneId);
+        int i;
+        for (i = 0; i < phones.size(); i++) {
+            if (phones.get(i).getId().equals(phoneId)) {
+                break;
+            }
+        }
+        phones.remove(i);
     }
 
-    public void setPhones(Map<Integer, Phone> phones) {
+    public void setPhones(List<Phone> phones) {
         this.phones = phones;
     }
 
-    public Map<Integer, Phone> getPhones() {
+    public List<Phone> getPhones() {
         return phones;
     }
 

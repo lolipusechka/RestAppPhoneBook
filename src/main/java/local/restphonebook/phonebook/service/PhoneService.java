@@ -12,7 +12,7 @@ public interface PhoneService {
 
     Phone read(Integer id);
 
-    List<Phone> readByPhoneNumber(String phoneNumber);
+    List<Phone> readByPhoneNumber(String phoneNumber, Integer userId);
 
     boolean update(Phone phone, Integer id);
 

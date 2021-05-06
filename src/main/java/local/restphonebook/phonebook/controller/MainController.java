@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -109,13 +108,10 @@ public class MainController {
         }
 
         final String phoneNumber = phone.getPhoneNumber();
-        final List<Phone> phoneNumbers = phoneService.readByPhoneNumber(phoneNumber);
-        List<Phone> filteredPhoneList = phoneNumbers.stream()
-                .filter(phoneFromList -> phoneFromList.getUserId().equals(userId))
-                .collect(Collectors.toList());
+        final List<Phone> phoneList = phoneService.readByPhoneNumber(phoneNumber, userId);
 
-        return !filteredPhoneList.isEmpty()
-                ? new ResponseEntity<>(filteredPhoneList, HttpStatus.OK)
+        return !phoneList.isEmpty()
+                ? new ResponseEntity<>(phoneList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
@@ -125,7 +121,7 @@ public class MainController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         } else {
             final User oldUser = userService.read(userId);
-            final Map<Integer, Phone> phones = oldUser.getPhones();
+            final List<Phone> phones = oldUser.getPhones();
             user.setPhones(phones);
 
             return new ResponseEntity<>(HttpStatus.OK);

@@ -74,34 +74,37 @@ class PhoneServiceImplTest {
         List<Phone> phoneList = new ArrayList<>();
         Phone phone = new Phone();
         phone.setPhoneNumber("555111");
+        phone.setUserId(1);
         phoneList.add(phone);
 
         phoneService.create(phone);
 
-        assertEquals(phoneList, phoneService.readByPhoneNumber("5"));
-        assertEquals(phoneList, phoneService.readByPhoneNumber("55"));
-        assertEquals(phoneList, phoneService.readByPhoneNumber("555"));
-        assertEquals(phoneList, phoneService.readByPhoneNumber("555111"));
+        assertEquals(phoneList, phoneService.readByPhoneNumber("5", 1));
+        assertEquals(phoneList, phoneService.readByPhoneNumber("55", 1));
+        assertEquals(phoneList, phoneService.readByPhoneNumber("555", 1));
+        assertEquals(phoneList, phoneService.readByPhoneNumber("555111", 1));
     }
 
     @Test
     void readByPhoneNumber_whenDataIsNotValidAndMapHaveValues_thenReturnEmptyListOfPhone() {
         Phone phone1 = new Phone();
         phone1.setPhoneNumber("555111");
+        phone1.setUserId(1);
         Phone phone2 = new Phone();
         phone2.setPhoneNumber("654");
+        phone2.setUserId(2);
 
         phoneService.create(phone1);
         phoneService.create(phone2);
 
-        assertTrue(phoneService.readByPhoneNumber("").isEmpty());
-        assertTrue(phoneService.readByPhoneNumber("12").isEmpty());
-        assertTrue(phoneService.readByPhoneNumber("555112").isEmpty());
+        assertTrue(phoneService.readByPhoneNumber("", 1).isEmpty());
+        assertTrue(phoneService.readByPhoneNumber("12", 1).isEmpty());
+        assertTrue(phoneService.readByPhoneNumber("555112", 2).isEmpty());
     }
 
     @Test
     void readByPhoneNumber_whenMapDoNotHaveValues_thenReturnEmptyListOfPhone() {
-        assertTrue(phoneService.readByPhoneNumber("555112").isEmpty());
+        assertTrue(phoneService.readByPhoneNumber("555112", 1).isEmpty());
     }
 
     @Test
@@ -111,22 +114,25 @@ class PhoneServiceImplTest {
 
         Phone originalPhone = new Phone();
         originalPhone.setPhoneNumber("555123");
+        originalPhone.setUserId(1);
 
         Phone updatedPhone = new Phone();
         updatedPhone.setPhoneNumber("123555");
+        updatedPhone.setUserId(1);
 
         Phone exceptedPhone = new Phone();
         exceptedPhone.setId(1);
         exceptedPhone.setPhoneNumber("123555");
+        exceptedPhone.setUserId(1);
 
         originalList.add(originalPhone);
         updatedList.add(updatedPhone);
 
         phoneService.create(originalPhone);
 
-        assertEquals(originalList, phoneService.readByPhoneNumber("555123"));
+        assertEquals(originalList, phoneService.readByPhoneNumber("555123", 1));
         assertTrue(phoneService.update(updatedPhone, 1));
-        assertEquals(updatedList, phoneService.readByPhoneNumber("123555"));
+        assertEquals(updatedList, phoneService.readByPhoneNumber("123555", 1));
         assertEquals(exceptedPhone, phoneService.read(1));
     }
 
@@ -137,22 +143,25 @@ class PhoneServiceImplTest {
 
         Phone originalPhone = new Phone();
         originalPhone.setPhoneNumber("555123");
+        originalPhone.setUserId(1);
 
         Phone updatedPhone = new Phone();
         updatedPhone.setPhoneNumber("123555");
+        updatedPhone.setUserId(1);
 
         Phone exceptedPhone = new Phone();
         exceptedPhone.setId(1);
         exceptedPhone.setPhoneNumber("123555");
+        exceptedPhone.setUserId(1);
 
         originalList.add(originalPhone);
         updatedList.add(updatedPhone);
 
         phoneService.create(originalPhone);
 
-        assertEquals(originalList, phoneService.readByPhoneNumber("555123"));
+        assertEquals(originalList, phoneService.readByPhoneNumber("555123", 1));
         assertFalse(phoneService.update(updatedPhone, 5));
-        assertNotEquals(updatedList, phoneService.readByPhoneNumber("123555"));
+        assertNotEquals(updatedList, phoneService.readByPhoneNumber("123555", 1));
         assertNotEquals(exceptedPhone, phoneService.read(1));
     }
 

@@ -33,14 +33,14 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
-    public List<Phone> readByPhoneNumber(String phoneNumber) {
+    public List<Phone> readByPhoneNumber(String phoneNumber, Integer userId) {
         String lowerCasePhoneNumber =  phoneNumber.toLowerCase(Locale.ROOT);
         return phoneMap.entrySet().stream()
                 .map(integerPhoneEntry -> integerPhoneEntry.getValue())
                 .filter(phone -> (((phone.getPhoneNumber().equals(lowerCasePhoneNumber))
                         && (!lowerCasePhoneNumber.equals("")))
                         || ((phone.getPhoneNumber().startsWith(lowerCasePhoneNumber))
-                        && (!lowerCasePhoneNumber.equals("")))))
+                        && (!lowerCasePhoneNumber.equals(""))) &&(phone.getUserId().equals(userId))))
                 .collect(Collectors.toList());
     }
 
