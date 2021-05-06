@@ -12,7 +12,7 @@
 	<artifactId>phonebook</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>phonebook</name>
-	<description>Test project for DINS</description>
+	<description>train rest</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
